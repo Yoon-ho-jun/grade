@@ -156,18 +156,18 @@ def move(dir):
         time.sleep(0.5)
         
         righ(1,2)
-        time.sleep(0.1)
+        time.sleep(0.4)
         righ(5,6)
-        time.sleep(0.1)
+        time.sleep(0.4)
         righ(3,4)
-        time.sleep(0.1)
+        time.sleep(0.4)
 
         mid(5,6)
-        time.sleep(0.1)
+        time.sleep(0.4)
         mid(3,4)
-        time.sleep(0.1)
+        time.sleep(0.4)
         mid(1,2)
-        time.sleep(0.1)
+        time.sleep(0.4)
         
         '''
         right(0,1)
@@ -616,8 +616,7 @@ print("auto? : manual?")
 
 try:
     while True:
-        move(1)
-        '''
+        
         sw=sw_val() # output sw func. value
         print(sw,dist)
         time.sleep(0.5)
@@ -626,12 +625,16 @@ try:
         #if(sw == '7'): #manual    #수동조작        
         if(sw == '2'):#left:
             move(3) #turn left
-            sw=sw_val() # output sw func. value
+            f = open('sw.txt', 'w')
+            f.write('9') # stop
+            f.close()
             
 
         elif(sw=='4'):#right):
             move(2) #turn right
-            sw=sw_val() # output sw func. value
+            f = open('sw.txt', 'w')
+            f.write('9') # stop
+            f.close()
 
         elif(sw=='3'):#go):
             while True:
@@ -660,16 +663,20 @@ try:
             time.sleep(0.5)
             os.system('echo "capture" | mutt -s "capture" -a "still_shot.jpg" -- "a01043327120@gmail.com"')
             print("Send complete")
-            sw = '9'
+            f = open('sw.txt', 'w')
+            f.write('9') # stop
+            f.close()
             
         elif(sw=='6'):#cam):
             move(7)
-            '''
-            #left(5,6) #head up
-            #os.system('raspistill -t 1 -o still_shot.jpg')
-            #print("cam capture")
-        '''
-            sw=sw_val() # output sw func. value
+            
+            left(5,6) #head up
+            os.system('raspistill -t 1 -o still_shot.jpg')
+            print("cam capture")
+        
+            f = open('sw.txt', 'w')
+            f.write('9') # stop
+            f.close()
 
 
             #elif(sw=='8'):#auto):
@@ -679,7 +686,7 @@ try:
         elif(sw == '8'):#auto):   #자동조작
             end_x=input('x 좌표를 입력하시오 :')
             end_y=input('y 좌표를 입력하시오 :')
-            print("moving ... ","(",start_x," , ","start_y",")"," to ","(",end_x," , ",end_y,")")
+            print("moving ... ","(",start_x," , ",start_y,")"," to ","(",end_x," , ",end_y,")")
             
             #if(sw == '7'):#manual): #수동조작
                 #sw=manual   변수설정 
@@ -700,111 +707,31 @@ try:
                     start_x=end_x
                     start_y=end_y
                 
-                sw='0'
-'''            
-        '''
+                f = open('sw.txt', 'w')
+                f.write('9') # stop
+                f.close()
+
             elif(start_x != end_x and start_y == end_y):
 
                 if(start_x == start_y):
-                    stop=0        #초음파센서
-                    start=0
-                    GPIO.output(GPIO_TRIGGER,False)
-                    time.sleep(0.01)
-    
-                    GPIO.output(GPIO_TRIGGER,True)
-                    time.sleep(0.00001)
-                    GPIO.output(GPIO_TRIGGER,False)
+                    dist=distance_val()    
 
-                    while GPIO.input(GPIO_ECHO)==0:
-                        start = time.time()
+                    if(distance =='0'):
+                        move(4) # move right
+                        for i in range (0,6):
+                            move(1) # move go
+                        move(5) # move left
 
-                    while GPIO.input(GPIO_ECHO)==1:
-                        stop=time.time()
-            
-                    elasped = stop-start
-
-                    if(stop and start):
-            
-                        distance = (elasped * 34000.0)/2
-                        print("Distance : %.1f cm" % distance)  #초음파센서
-
-                        if(distance < 30):
-                            move(4) # move right
-                            for i in range (0,6):
-                                move(1) # move go
-                            move(5) # move left
-
-                        else:
-                            for i in range (0,6):
-                                move(1) # move go
-                            for i in range (0,6):
-                                move(2) # turn 180 left
-                            start_x=end_x
-                            start_y=end_y
+                    else:
+                        for i in range (0,6):
+                            move(1) # move go
+                        for i in range (0,6):
+                            move(2) # turn 180 left
+                        start_x=end_x
+                        start_y=end_y
 
                 elif(start_x != start_y):
-                    stop=0        #초음파센서
-                    start=0
-                    GPIO.output(GPIO_TRIGGER,False)
-                    time.sleep(0.01)
-    
-                    GPIO.output(GPIO_TRIGGER,True)
-                    time.sleep(0.00001)
-                    GPIO.output(GPIO_TRIGGER,False)
-
-                    while GPIO.input(GPIO_ECHO)==0:
-                        start = time.time()
-
-                    while GPIO.input(GPIO_ECHO)==1:
-                        stop=time.time()
-            
-                    elasped = stop-start
-
-                    if(stop and start):
-            
-                        distance = (elasped * 34000.0)/2
-                        print("Distance : %.1f cm" % distance)  #초음파센서
-
-                        if(distance < 30):
-                            move(4) # move right
-                            for i in range (0,6):
-                                move(1) # move go
-                            move(5) # move left
-
-                        else:
-                            for i in range (0,3):
-                                move(2) #turn right 90 deg
-                            for i in range (0,6):
-                                move(1) # move go
-                            for i in range (0,3):
-                                move(3) #turn left 90 deg
-                            start_x=end_x
-                            start_y=end_y
-                
-
-            elif(start_x != end_x and start_y != end_y):
-
-                stop=0        #초음파센서
-                start=0
-                GPIO.output(GPIO_TRIGGER,False)
-                time.sleep(0.01)
-    
-                GPIO.output(GPIO_TRIGGER,True)
-                time.sleep(0.00001)
-                GPIO.output(GPIO_TRIGGER,False)
-
-                while GPIO.input(GPIO_ECHO)==0:
-                    start = time.time()
-
-                while GPIO.input(GPIO_ECHO)==1:
-                    stop=time.time()
-            
-                elasped = stop-start
-
-                if(stop and start):
-            
-                    distance = (elasped * 34000.0)/2
-                    print("Distance : %.1f cm" % distance)  #초음파센서
+                    dist=distance_val()
 
                     if(distance < 30):
                         move(4) # move right
@@ -813,97 +740,84 @@ try:
                         move(5) # move left
 
                     else:
-                        move(2)#right 45 deg
+                        for i in range (0,3):
+                            move(2) #turn right 90 deg
                         for i in range (0,6):
-                            move(1) #go_straight
-                        move(2)#turn right 45 deg
+                            move(1) # move go
+                        for i in range (0,3):
+                            move(3) #turn left 90 deg
                         start_x=end_x
                         start_y=end_y
 
+                f = open('sw.txt', 'w')
+                f.write('9') # stop
+                f.close()    
 
+            elif(start_x != end_x and start_y != end_y):
+
+                dist=distance_val()
+
+                if(distance == '0'):
+                    move(4) # move right
+                    for i in range (0,6):
+                        move(1) # move go
+                    move(5) # move left
+
+                else:
+                    move(2)#right 45 deg
+                    for i in range (0,6):
+                        move(1) #go_straight
+                    move(2)#turn right 45 deg
+                    start_x=end_x
+                    start_y=end_y
+
+                f = open('sw.txt', 'w')
+                f.write('9') # stop
+                f.close()
+                
             elif(start_x == end_x and start_y != end_y):
 
                 
                 if(start_x == start_y):
-                    stop=0        #초음파센서
-                    start=0
-                    GPIO.output(GPIO_TRIGGER,False)
-                    time.sleep(0.01)
-    
-                    GPIO.output(GPIO_TRIGGER,True)
-                    time.sleep(0.00001)
-                    GPIO.output(GPIO_TRIGGER,False)
+                    dist=distance_val()
+                    if(distance == '0'):
+                        move(4) # move right
+                        for i in range (0,6):
+                            move(1) # move go
+                        move(5) # move left
 
-                    while GPIO.input(GPIO_ECHO)==0:
-                        start = time.time()
-
-                    while GPIO.input(GPIO_ECHO)==1:
-                        stop=time.time()
-            
-                    elasped = stop-start
-
-                    if(stop and start):
-            
-                        distance = (elasped * 34000.0)/2
-                        print("Distance : %.1f cm" % distance)  #초음파센서
-
-                        if(distance < 30):
-                            move(4) # move right
-                            for i in range (0,6):
-                                move(1) # move go
-                            move(5) # move left
-
-                        else:
-                            for i in range (0,3):
-                                move(3) #turn left 90 deg
-                            for i in range (0,6):
-                                move(1) # move go
-                            for i in range (0,3):
-                                move(2) #turn right 90 deg
-                            start_x=end_x
-                            start_y=end_y
+                    else:
+                        for i in range (0,3):
+                            move(3) #turn left 90 deg
+                        for i in range (0,6):
+                            move(1) # move go
+                        for i in range (0,3):
+                            move(2) #turn right 90 deg
+                        start_x=end_x
+                        start_y=end_y
 
                 elif(start_x != start_y):
-                    stop=0        #초음파센서
-                    start=0
-                    GPIO.output(GPIO_TRIGGER,False)
-                    time.sleep(0.01)
-    
-                    GPIO.output(GPIO_TRIGGER,True)
-                    time.sleep(0.00001)
-                    GPIO.output(GPIO_TRIGGER,False)
+                    dist=distance_val()
+                    if(distance =='0'):
+                        move(4) # move right
+                        for i in range (0,6):
+                            move(1) # move go
+                        move(5) # move left
 
-                    while GPIO.input(GPIO_ECHO)==0:
-                        start = time.time()
+                    else:
+                        for i in range (0,3):
+                            move(2) #turn right 90 deg
+                        for i in range (0,6):
+                            move(1) # move go
+                        for i in range (0,3):
+                            move(3) #turn left 90 deg
+                        start_x=end_x
+                        start_y=end_y
 
-                    while GPIO.input(GPIO_ECHO)==1:
-                        stop=time.time()
-            
-                    elasped = stop-start
 
-                    if(stop and start):
-            
-                        distance = (elasped * 34000.0)/2
-                        print("Distance : %.1f cm" % distance)  #초음파센서
-
-                        if(distance < 30):
-                            move(4) # move right
-                            for i in range (0,6):
-                                move(1) # move go
-                            move(5) # move left
-
-                        else:
-                            for i in range (0,3):
-                                move(2) #turn right 90 deg
-                            for i in range (0,6):
-                                move(1) # move go
-                            for i in range (0,3):
-                                move(3) #turn left 90 deg
-                            start_x=end_x
-                            start_y=end_y
-'''
-
-         
+                f = open('sw.txt', 'w')
+                f.write('9') # stop
+                f.close()
     
 
 except KeyboardInterrupt:
