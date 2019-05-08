@@ -111,9 +111,9 @@ def right(start, end):
         set_PWM_Duty(x,5.5)
 
 def righ(start, end):
-    print("right 5.0");
+    print("right 4.0");
     for x in range(start,end):
-        set_PWM_Duty(x,3.0)
+        set_PWM_Duty(x,4.0)
 
 def left_curve(start, end):   
     print("left_curve");
@@ -153,295 +153,73 @@ def move(dir):
     if(dir==1):             #go straight
 
         mid(0,9)
-        time.sleep(0.5)
+        time.sleep(0.8)
         
         righ(1,2)
-        time.sleep(0.4)
+        time.sleep(0.8)
         righ(5,6)
-        time.sleep(0.4)
+        time.sleep(0)
         righ(3,4)
-        time.sleep(0.4)
+        time.sleep(0.8)
 
         mid(5,6)
-        time.sleep(0.4)
+        time.sleep(0.8)
         mid(3,4)
-        time.sleep(0.4)
+        time.sleep(0.8)
         mid(1,2)
-        time.sleep(0.4)
-        
-        '''
-        right(0,1)
-        time.sleep(0.2)
-        left(2,3)
-        time.sleep(0.2)
-        right(4,5)
-        time.sleep(0.2)
-        left(6,7)
-        time.sleep(0.2)
-        right(8,9)
-        time.sleep(0.2)
-
-        mid(7,8)
-        time.sleep(0.2)
-        righ(1,2)
-        time.sleep(0.2)
-        mid(3,4)
-        time.sleep(0.2)
-        lef(5,6)
-        time.sleep(0.2)
-
-        left(0,1)
-        time.sleep(0.2)
-        right(2,3)
-        time.sleep(0.2)
-        left(4,5)
-        time.sleep(0.2)
-        right(6,7)
-        time.sleep(0.2)
-        left(8,9)
-        time.sleep(0.2)
-
-        lef(7,8)
-        time.sleep(0.2)
-        mid(1,2)
-        time.sleep(0.2)
-        righ(3,4)
-        time.sleep(0.2)
-        mid(5,6)
-        time.sleep(0.2)
-
-        mid(5,6)
-        time.sleep(0.2)
-
-        '''
-
-        '''
-        lef(8,9)
-        time.sleep(0.5)
-        righ(0,1)
-        time.sleep(0.5)
-        lef(2,3)
-        time.sleep(0.5)
-        righ(4,5)
-        time.sleep(0.5)
-        lef(6,7)
-        time.sleep(0.5)
-
-        righ(8,9)
-        time.sleep(0.5)
-        lef(0,1)
-        time.sleep(0.5)
-        righ(2,3)
-        time.sleep(0.5)
-        lef(4,5)
-        time.sleep(0.5)
-        righ(6,7)
-        time.sleep(0.5)
-        '''
-        '''
-        right(6,7)
-        time.sleep(0.05)
-        left(4,5)
-        time.sleep(0.01)
-        right(2,3)
-        time.sleep(0.01)
-        left(0,1)
-        time.sleep(0.01)
-        right(8,9)
-        time.sleep(0.01)
-
-        right_rr(6,7)
-        time.sleep(0.05)
-        left_ll(4,5)
-        time.sleep(0.01)
-        right_rr(2,3)
-        time.sleep(0.01)
-        left_ll(0,1)
-        time.sleep(0.01)
-        right_rr(8,9)
-        time.sleep(0.01)
-
-        right_r(6,7)
-        time.sleep(0.05)
-        left_l(4,5)
-        time.sleep(0.01)
-        right_r(2,3)
-        time.sleep(0.01)
-        left_l(0,1)
-        time.sleep(0.01)
-        right_r(8,9)
-        time.sleep(0.01)
+        time.sleep(0.8)
 
         mid(6,7)
-        time.sleep(0.05)
-        mid(4,5)
-        time.sleep(0.01)
-        mid(2,3)
-        time.sleep(0.01)
-        mid(0,1)
-        time.sleep(0.01)
-        mid(8,9)
-        time.sleep(0.01)
-
-        left_l(6,7)
-        time.sleep(0.05)
-        right_r(4,5)
-        time.sleep(0.01)
-        left_l(2,3)
-        time.sleep(0.01)
-        right_r(0,1)
-        time.sleep(0.01)
-        left_l(8,9)
-        time.sleep(0.01)
-
-        left_ll(6,7)
-        time.sleep(0.05)
-        right_rr(4,5)
-        time.sleep(0.01)
-        left_ll(2,3)
-        time.sleep(0.01)
-        right_rr(0,1)
-        time.sleep(0.01)
-        left_ll(8,9)
-        time.sleep(0.01)
-
-        left(6,7)
-        time.sleep(0.05)
-        right(4,5)
-        time.sleep(0.01)
-        left(2,3)
-        time.sleep(0.01)
-        right(0,1)
-        time.sleep(0.01)
-        left(8,9)
-        time.sleep(0.01)
-
-        mid(6,7)
-        time.sleep(0.05)
-        mid(4,5)
-        time.sleep(0.01)
-        mid(2,3)
-        time.sleep(0.01)
-        mid(0,1)
-        time.sleep(0.01)
-        mid(8,9)
-        time.sleep(0.01)
-        '''
-        '''
-        right_r(6,7)
-        time.sleep(0.05)
-        right(5,6)
-        time.sleep(0.05)
-        
-        left_l(4,5)
-        time.sleep(0.05)
-        right_r(3,4)
-        time.sleep(0.05)
-        
-        right_r(2,3)
-        time.sleep(0.05)
-        right_r(1,2)
-        time.sleep(0.05)
-        
-        mid(0,1)
-        time.sleep(0.05)
-        left_l(7,8)
-        time.sleep(0.05)
-        
-        left_l(8,9)
-        time.sleep(0.05)
-
-        mid(5,6)
-        mid(3,4)
-        mid(1,2)
-        mid(7,8)
-        time.sleep(0.05)
-        
-        left_l(6,7)
-        time.sleep(0.05)
-        right(5,6)
-        time.sleep(0.05)
-        
-        right_r(4,5)
-        time.sleep(0.05)
-        right_r(3,4)
-        time.sleep(0.05)
-        
-        left_l(2,3)
-        time.sleep(0.05)
-        right_r(1,2)
-        time.sleep(0.05)
-        
-        mid(0,1)
-        time.sleep(0.05)
-        right_r(7,8)
-        time.sleep(0.05)
-        
-        right_r(8,9)
-        time.sleep(0.05)
-'''
-        
-        '''
-        up_right(8,9)
-        left_s(6,7)
-        right_s(2,3)
-        lef(0,1)
-        time.sleep(0.1)
-        
-        right(7,8)
-        left(5,6)
-        right(3,4)
-        left(1,2)
-        time.sleep(0.1)
-        
-        left(7,8)   
-        right(5,6)
-        left(3,4)
-        right(1,2)
-        time.sleep(0.1)
-'''
-        
-
-        
-        '''
-        right(7,8)   #back
-        left(5,6)
-        left(3,4)
-        right(1,2)
-        time.sleep(0.1)
-
-        left(7,8)
-        right(5,6)
-        right(3,4)
-        left(1,2)
-        time.sleep(0.1)
-        '''
-        '''        
-        right_s(7,8)
-        time.sleep(0.1)        
-        left_s(1,2)
-        time.sleep(0.1)
-        mid(0,7)
-        time.sleep(0.1)
-        
-        right_s(3,4)
-        time.sleep(0.1)
-        left_s(5,6)
-        time.sleep(0.1)
-        mid(0,7)
-        time.sleep(0.1)       
-'''
+        time.sleep(0.4)
         
         
         
     elif(dir==2):           #left_curve turn_right  30 deg
+        
+        righ(6,7)
+        time.sleep(0.1)
+        lef(4,5)
+        time.sleep(0.1)
+        lef(2,3)
+        time.sleep(0.1)
+        lef(0,1)
+        time.sleep(0.1)
 
+        mid(0,1)
+        time.sleep(0.1)
+        mid(2,3)
+        time.sleep(0.1)
+        mid(4,5)
+        time.sleep(0.1)
+        mid(6,7)
+        time.sleep(0.1)
+
+        '''
+        lef(8,9)
+        time.sleep(1)
+        lef(0,1)
+        time.sleep(1)
+        lef(2,3)
+        time.sleep(1)
+        lef(4,5)
+        time.sleep(1)
+
+        mid(0,1)
+        time.sleep(1)
+        mid(4,5)
+        time.sleep(1)
+        mid(2,3)
+        time.sleep(1)
+        mid(8,9)
+        time.sleep(1)
+        
+'''
+        '''
         mid(0,9)
         time.sleep(0.05)
 
-        mid(7,8)
-        time.sleep(0.05)
-        right(8,9)
+       
+        right(6,7)
         time.sleep(0.05)
         left_curve(0,1)
         time.sleep(0.05)
@@ -449,47 +227,66 @@ def move(dir):
         time.sleep(0.05)
         left_curve(2,3)
         time.sleep(0.05)
-        mid(3,4)
+        right(7,8)
         time.sleep(0.05)
         left_curve(4,5)
         time.sleep(0.05)
         mid(5,6)
         time.sleep(0.05)
-        left_curve(6,7)
+        left_curve(8,9)
+        time.sleep(0.1)
+        
+        for i in range (0,9):
+            mid(i,i+1)
+            time.sleep(1)
+'''
+        
+
+    elif(dir==3):           #turn_right  30deg
+        '''
+        righ(6,7)
+        time.sleep(0.1)
+        righ(4,5)
+        time.sleep(0.1)
+        lef(2,3)
+        time.sleep(0.1)
+        righ(0,1)
+        time.sleep(0.1)
+
+        mid(0,1)
+        time.sleep(0.1)
+        mid(2,3)
+        time.sleep(0.1)
+        mid(4,5)
+        time.sleep(0.1)
+        mid(6,7)
+        time.sleep(0.1)
+'''
+        mid(0,9)
+        time.sleep(0.05)
+
+       
+        right(6,7)
+        time.sleep(0.05)
+        left_curve(0,1)
+        time.sleep(0.05)
+        mid(1,2)
+        time.sleep(0.05)
+        left_curve(2,3)
+        time.sleep(0.05)
+        right(7,8)
+        time.sleep(0.05)
+        left_curve(4,5)
+        time.sleep(0.05)
+        mid(5,6)
+        time.sleep(0.05)
+        left_curve(8,9)
         time.sleep(0.1)
         
         for i in range (0,9):
             mid(i,i+1)
             time.sleep(1)
 
-
-    elif(dir==3):           #right_curve turn_left  30deg
-
-        mid(0,9)
-        time.sleep(0.05)
-
-        mid(7,8)
-        time.sleep(0.05)
-        left(8,9)
-        time.sleep(0.05)
-        right_curve(0,1)
-        time.sleep(0.05)
-        mid(1,2)
-        time.sleep(0.05)
-        right_curve(2,3)
-        time.sleep(0.05)
-        mid(3,4)
-        time.sleep(0.05)
-        right_curve(4,5)
-        time.sleep(0.05)
-        mid(5,6)
-        time.sleep(0.05)
-        right_curve(6,7)
-        time.sleep(1)
-
-        for i in range (0,9):
-            mid(i,i+1)
-            time.sleep(1)
 
     elif(dir == 4):     #move right
 
@@ -589,7 +386,7 @@ def move(dir):
         
     elif(dir==8):
 
-        mid(0,9)
+        mid(0,15)
         time.sleep(0.05)
         
         
@@ -612,7 +409,7 @@ i=0
 sw='0'
 #sw=0 #first price
 dist=distance_val()
-print("auto? : manual?")
+print("welcom snake world!")
 
 try:
     while True:
@@ -624,14 +421,14 @@ try:
 
         #if(sw == '7'): #manual    #수동조작        
         if(sw == '2'):#left:
-            move(3) #turn left
+            move(2) #turn left
             f = open('sw.txt', 'w')
             f.write('9') # stop
             f.close()
             
 
         elif(sw=='4'):#right):
-            move(2) #turn right
+            move(3) #turn right
             f = open('sw.txt', 'w')
             f.write('9') # stop
             f.close()
@@ -642,7 +439,9 @@ try:
                 move(1) #go
 
                 if(dist == '0'):
-                    move(4) #move right
+                    move(5) #move left
+                    
+                
                 sw=sw_val() # output sw func. value
                 if(sw != '3'):
                     break
@@ -662,16 +461,17 @@ try:
             print("Sending ...")
             time.sleep(0.5)
             os.system('echo "capture" | mutt -s "capture" -a "still_shot.jpg" -- "a01043327120@gmail.com"')
+            time.sleep(0.05)
             print("Send complete")
             f = open('sw.txt', 'w')
             f.write('9') # stop
             f.close()
             
         elif(sw=='6'):#cam):
-            move(7)
             
             left(5,6) #head up
-            os.system('raspistill -t 1 -o still_shot.jpg')
+            os.system('raspistill -t 1 -o still_shot.jpg&')
+            time.sleep(0.05)
             print("cam capture")
         
             f = open('sw.txt', 'w')
