@@ -194,74 +194,9 @@ def move(dir):
         mid(6,7)
         time.sleep(0.1)
 
-        '''
-        lef(8,9)
-        time.sleep(1)
-        lef(0,1)
-        time.sleep(1)
-        lef(2,3)
-        time.sleep(1)
-        lef(4,5)
-        time.sleep(1)
-
-        mid(0,1)
-        time.sleep(1)
-        mid(4,5)
-        time.sleep(1)
-        mid(2,3)
-        time.sleep(1)
-        mid(8,9)
-        time.sleep(1)
-        
-'''
-        '''
-        mid(0,9)
-        time.sleep(0.05)
-
-       
-        right(6,7)
-        time.sleep(0.05)
-        left_curve(0,1)
-        time.sleep(0.05)
-        mid(1,2)
-        time.sleep(0.05)
-        left_curve(2,3)
-        time.sleep(0.05)
-        right(7,8)
-        time.sleep(0.05)
-        left_curve(4,5)
-        time.sleep(0.05)
-        mid(5,6)
-        time.sleep(0.05)
-        left_curve(8,9)
-        time.sleep(0.1)
-        
-        for i in range (0,9):
-            mid(i,i+1)
-            time.sleep(1)
-'''
-        
 
     elif(dir==3):           #turn_right  30deg
-        '''
-        righ(6,7)
-        time.sleep(0.1)
-        righ(4,5)
-        time.sleep(0.1)
-        lef(2,3)
-        time.sleep(0.1)
-        righ(0,1)
-        time.sleep(0.1)
 
-        mid(0,1)
-        time.sleep(0.1)
-        mid(2,3)
-        time.sleep(0.1)
-        mid(4,5)
-        time.sleep(0.1)
-        mid(6,7)
-        time.sleep(0.1)
-'''
         mid(0,9)
         time.sleep(0.05)
 
@@ -487,11 +422,12 @@ try:
             end_x=input('x 좌표를 입력하시오 :')
             end_y=input('y 좌표를 입력하시오 :')
             print("moving ... ","(",start_x," , ",start_y,")"," to ","(",end_x," , ",end_y,")")
-            
-            #if(sw == '7'):#manual): #수동조작
-                #sw=manual   변수설정 
+            print("Start??")
+            sw=input(sw_val())
+            if(sw == '7'):#manual): #수동조작
+                move(8)   #변수설정 
                
-            if(start_x==start_y and end_x==end_y):
+            elif(start_x==start_y and end_x==end_y):
                 dist=distance_val()
                 if(dist == '0'):
                     move(4) # move right
