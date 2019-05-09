@@ -394,6 +394,7 @@ try:
                 
                 sw=sw_val() # output sw func. value
                 if(sw != '3'):
+                    track=0
                     break
                 
                     
@@ -424,11 +425,11 @@ try:
                         f.write(data)
                         time.sleep(0.1)
                         if((draw/10)%2==0):
-                            for x in range (0,10):
-                                move(5)
-                        elif((draw/10)%2==1):
-                            for x in range (0,10):
+                            for x in range (0,21): #turn right
                                 move(4)
+                        elif((draw/10)%2==1):
+                            for x in range (0,10):  # turn left
+                                move(5)
                     if(dist == '0'):
                         move(5)
                         track+=1
@@ -494,19 +495,29 @@ try:
             if(sw == '7'):#manual): #수동조작
                 move(8)   #변수설정 
                
-            elif(start_x==start_y and end_x==end_y):
+            elif(start_x==start_y and end_x==end_y):  # end point (1,1)
                 dist=distance_val()
-                if(dist == '0'):
-                    move(4) # move right
-                    for i in range (0,6):
-                        move(1) # move go
-                    move(5) # move left
+                if(dist == '0'):          #saw track 
+                    move(5)
+                    track+=1
+                    dist=distance_val()
+                    if(dist=='1'):
+                        move(1)
+                        move(1)
+                        move(1)
+                        for x in range (0,track):
+                            move(4)
+                
 
                 else:
-                    move(3) #left 30 deg ->  45deg   x
-                    for i in range (0,6):
+                    for x in range (0,3): #turn left 45 deg
+                        move(5)
+                        
+                    for i in range (0,10):
                         move(1) # move go
-                    move(3) #turn left 30 deg ->  45deg   x
+                        
+                    for x in range (0,3): #turn left 45 deg
+                        move(5)
                     start_x=end_x
                     start_y=end_y
                 
@@ -514,63 +525,137 @@ try:
                 f.write('9') # stop
                 f.close()
 
-            elif(start_x != end_x and start_y == end_y):
+            elif(start_x == end_x and start_y != end_y):  
+                if(x==0):
+                    if(start_x == start_y):   #(0,0)->(0,1)   
+                        dist=distance_val()    
 
-                if(start_x == start_y):
-                    dist=distance_val()    
+                        if(dist == '0'):          #saw track 
+                            move(5)
+                            track+=1
+                            dist=distance_val()
+                            if(dist=='1'):
+                                move(1)
+                                move(1)
+                                move(1)
+                                for x in range (0,track):
+                                    move(4)
 
-                    if(distance =='0'):
-                        move(4) # move right
-                        for i in range (0,6):
-                            move(1) # move go
-                        move(5) # move left
+                        else:
+                            for x in range(0,5): 
+                                move(5) # turn left 90 deg
+                            for i in range (0,10):
+                                move(1) # move go
+                            for i in range (0,10):
+                                move(4) # turn right 90 deg
+                            
+                            start_x=end_x
+                            start_y=end_y
+            
+                    elif(start_x != start_y):   #(0,1)->(0,0)
+                        dist=distance_val()    
 
-                    else:
-                        for i in range (0,6):
-                            move(1) # move go
-                        for i in range (0,6):
-                            move(2) # turn 180 left
-                        start_x=end_x
-                        start_y=end_y
+                        if(dist == '0'):          #saw track 
+                            move(5)
+                            track+=1
+                            dist=distance_val()
+                            if(dist=='1'):
+                                move(1)
+                                move(1)
+                                move(1)
+                                for x in range (0,track):
+                                    move(4)
 
-                elif(start_x != start_y):
-                    dist=distance_val()
+                        else:
+                            for x in range(0,5): 
+                                move(4) # turn right 90 deg
+                            for i in range (0,10):
+                                move(1) # move go
+                            for i in range (0,10):
+                                move(5) # turn left 90 deg
+                            
+                            start_x=end_x
+                            start_y=end_y
 
-                    if(distance < 30):
-                        move(4) # move right
-                        for i in range (0,6):
-                            move(1) # move go
-                        move(5) # move left
+                    f = open('sw.txt', 'w')
+                    f.write('9') # stop
+                    f.close()    
+                if(x==1):
+                    if(start_x != start_y):   #(1,0)->(1,1)   
+                        dist=distance_val()    
 
-                    else:
-                        for i in range (0,3):
-                            move(2) #turn right 90 deg
-                        for i in range (0,6):
-                            move(1) # move go
-                        for i in range (0,3):
-                            move(3) #turn left 90 deg
-                        start_x=end_x
-                        start_y=end_y
+                        if(dist == '0'):          #saw track 
+                            move(5)
+                            track+=1
+                            dist=distance_val()
+                            if(dist=='1'):
+                                move(1)
+                                move(1)
+                                move(1)
+                                for x in range (0,track):
+                                    move(4)
 
-                f = open('sw.txt', 'w')
-                f.write('9') # stop
-                f.close()    
+                        else:
+                            for x in range(0,10): 
+                                move(4) # turn right 90 deg
+                            for i in range (0,10):
+                                move(1) # move go
+                            for i in range (0,5):
+                                move(5) # turn left 90 deg
+                            
+                            start_x=end_x
+                            start_y=end_y
+            
+                    elif(start_x == start_y):   #(1,1)->(1,0)
+                        dist=distance_val()    
 
-            elif(start_x != end_x and start_y != end_y):
+                        if(dist == '0'):          #saw track 
+                            move(5)
+                            track+=1
+                            dist=distance_val()
+                            if(dist=='1'):
+                                move(1)
+                                move(1)
+                                move(1)
+                                for x in range (0,track):
+                                    move(4)
+
+                        else:
+                            for x in range(0,10): 
+                                move(5) # turn left 90 deg
+                            for i in range (0,10):
+                                move(1) # move go
+                            for i in range (0,5):
+                                move(4) # turn right 90 deg
+                            
+                            start_x=end_x
+                            start_y=end_y
+
+                    f = open('sw.txt', 'w')
+                    f.write('9') # stop
+                    f.close()
+            elif(start_x != end_x and start_y != end_y): #(1,0)-> (0,1)
 
                 dist=distance_val()
 
-                if(distance == '0'):
-                    move(4) # move right
-                    for i in range (0,6):
-                        move(1) # move go
-                    move(5) # move left
+                if(dist == '0'):          #saw track 
+                    move(5)
+                    track+=1
+                    dist=distance_val()
+                    if(dist=='1'):
+                        move(1)
+                        move(1)
+                        move(1)
+                        for x in range (0,track):
+                            move(4)
 
                 else:
-                    move(2)#right 45 deg
-                    for i in range (0,6):
-                        move(1) #go_straight
-                    move(2)#turn right 45 deg
+                    for x in range(0,10): 
+                        move(4) # turn right 90 deg
+                    for i in range (0,10):
+                        move(1) # move go
+                    for i in range (0,10):
+                        move(4) # turn right 90 deg
                     start_x=end_x
                     start_y=end_y
 
@@ -578,52 +663,36 @@ try:
                 f.write('9') # stop
                 f.close()
                 
-            elif(start_x == end_x and start_y != end_y):
+            elif(start_x != end_x and start_y == end_y): 
 
-                
-                if(start_x == start_y):
+                dist=distance_val()
+                if(dist == '0'):          #saw track 
+                    move(5)
+                    track+=1
                     dist=distance_val()
-                    if(distance == '0'):
-                        move(4) # move right
-                        for i in range (0,6):
-                            move(1) # move go
-                        move(5) # move left
+                    if(dist=='1'):
+                        move(1)
+                        move(1)
+                        move(1)
+                        for x in range (0,track):
+                            move(4)
 
-                    else:
-                        for i in range (0,3):
-                            move(3) #turn left 90 deg
-                        for i in range (0,6):
-                            move(1) # move go
-                        for i in range (0,3):
-                            move(2) #turn right 90 deg
-                        start_x=end_x
-                        start_y=end_y
+                else:
+                    for i in range (0,10):
+                        move(1) #move go
+                    for i in range (0,10):
+                        move(4) # turn right 180 deg
+                            
+                    start_x=end_x
+                    start_y=end_y
 
-                elif(start_x != start_y):
-                    dist=distance_val()
-                    if(distance =='0'):
-                        move(4) # move right
-                        for i in range (0,6):
-                            move(1) # move go
-                        move(5) # move left
-
-                    else:
-                        for i in range (0,3):
-                            move(2) #turn right 90 deg
-                        for i in range (0,6):
-                            move(1) # move go
-                        for i in range (0,3):
-                            move(3) #turn left 90 deg
-                        start_x=end_x
-                        start_y=end_y
-
+               
 
                 f = open('sw.txt', 'w')
                 f.write('9') # stop
                 f.close()
 
     
-
 except KeyboardInterrupt:
     
     print ("Servo driver Application End")
