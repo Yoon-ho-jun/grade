@@ -153,46 +153,46 @@ def move(dir):
     if(dir==1):             #go straight
 
         mid(0,9)
-        time.sleep(0.8)
+        time.sleep(0.12)
+
         
         righ(1,2)
-        time.sleep(0.8)
+        time.sleep(0.12)
         righ(5,6)
-        time.sleep(0)
+        time.sleep(0.12)
         righ(3,4)
-        time.sleep(0.8)
+        time.sleep(0.12)
 
         mid(5,6)
-        time.sleep(0.8)
+        time.sleep(0.12)
         mid(3,4)
-        time.sleep(0.8)
+        time.sleep(0.12)
         mid(1,2)
-        time.sleep(0.8)
+        time.sleep(0.12)
 
         mid(6,7)
-        time.sleep(0.4)
-        
+        time.sleep(0.12)
         
         
     elif(dir==2):           #left_curve turn_right  30 deg
         
         righ(6,7)
-        time.sleep(0.1)
+        time.sleep(0.12)
         lef(4,5)
-        time.sleep(0.1)
+        time.sleep(0.12)
         lef(2,3)
-        time.sleep(0.1)
+        time.sleep(0.12)
         lef(0,1)
-        time.sleep(0.1)
+        time.sleep(0.12)
 
         mid(0,1)
-        time.sleep(0.1)
+        time.sleep(0.12)
         mid(2,3)
-        time.sleep(0.1)
+        time.sleep(0.12)
         mid(4,5)
-        time.sleep(0.1)
+        time.sleep(0.12)
         mid(6,7)
-        time.sleep(0.1)
+        time.sleep(0.12)
 
 
     elif(dir==3):           #turn_right  30deg
@@ -341,11 +341,16 @@ except IOError:
 start_x=0
 start_y=0
 i=0
-sw='0'
+track=0
+draw=0
+draw_t=0
+draw_go=0
 #sw=0 #first price
 dist=distance_val()
 print("welcom snake world!")
-
+f=open('route.txt','w')
+index=0
+draw_re=0
 try:
     while True:
         
@@ -371,10 +376,20 @@ try:
         elif(sw=='3'):#go):
             while True:
                 dist=distance_val()
-                move(1) #go
-
+                move(8)
+                
                 if(dist == '0'):
-                    move(5) #move left
+                    move(5)
+                    track+=1
+                    dist=distance_val()
+                    if(dist=='1'):
+                        move(1)
+                        move(1)
+                        move(1)
+                        for x in range (0,track):
+                            move(4)
+                elif(dist == '1'):
+                    move(1)
                     
                 
                 sw=sw_val() # output sw func. value
@@ -393,27 +408,79 @@ try:
             GPIO.output(14,False)#LED Off
 
         elif(sw=='5'):
-            print("Sending ...")
-            time.sleep(0.5)
-            os.system('echo "capture" | mutt -s "capture" -a "still_shot.jpg" -- "a01043327120@gmail.com"')
-            time.sleep(0.05)
-            print("Send complete")
-            f = open('sw.txt', 'w')
-            f.write('9') # stop
-            f.close()
-            
+            f=open('route.txt','w')
+            data="{}".format("Map inside the building\n----------------------------\n")
+            f.write(data)
+        
+            while True:
+                draw_re = int(draw/10)    
+                dist=distance_val()
+                draw = draw_t + draw_go
+                
+                if(draw<100):
+                
+                    if(draw!=0 and draw%10==0):
+                        data = "{}".format('\n')
+                        f.write(data)
+                        time.sleep(0.1)
+                        if((draw/10)%2==0):
+                            for x in range (0,10):
+                                move(5)
+                        elif((draw/10)%2==1):
+                            for x in range (0,10):
+                                move(4)
+                    if(dist == '0'):
+                        move(5)
+                        track+=1
+                        dist=distance_val()
+                        if(dist=='1'):
+                            move(1)
+                            move(1)
+                            move(1)
+                            for x in range (0,track):
+                                move(4)
+                            
+                            data="{}".format('|')
+                            f.write(data)
+                            draw_t+=1
+                            time.sleep(0.12)
+
+                    elif(dist == '1'):
+                        move(1)
+                        draw_go+=1
+                        if(draw_re%2==1):   # odd line text
+                            data="{}".format('←')
+                            f.write(data)
+                        elif(draw_re%2==0):  # even line text
+                            data="{}".format('→')
+                            f.write(data)
+                        time.sleep(0.12)
+
+                else:
+                    move(8)
+                    f = open('sw.txt', 'w')
+                    f.write('9') # stop
+                    f.close()
+                    os.system('cat route.py')
+                    time.sleep(0.05)
+                    
         elif(sw=='6'):#cam):
             
             left(5,6) #head up
             os.system('raspistill -t 1 -o still_shot.jpg&')
             time.sleep(0.05)
             print("cam capture")
+            print("Sending ...")
+            time.sleep(0.5)
+            os.system('echo "capture" | mutt -s "capture" -a "still_shot.jpg" -- "a01043327120@gmail.com"')
+            time.sleep(0.05)
+            print("Send complete")
         
             f = open('sw.txt', 'w')
             f.write('9') # stop
             f.close()
 
-
+            
             #elif(sw=='8'):#auto):
                 #sw==auto
          
@@ -554,6 +621,7 @@ try:
                 f = open('sw.txt', 'w')
                 f.write('9') # stop
                 f.close()
+
     
 
 except KeyboardInterrupt:
@@ -561,6 +629,7 @@ except KeyboardInterrupt:
     print ("Servo driver Application End")
     set_PWM(0,0,0)
     GPIO.cleanup()
+    f.close()
 
 GPIO.cleanup()
  
